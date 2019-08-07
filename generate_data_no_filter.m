@@ -1,4 +1,4 @@
-function [signal, label] = generate_data(num_date,num_class,noise_stand_variance,order)
+function [signal, label] = generate_data_no_filter(num_date,num_class,noise_stand_variance)
 num_each = num_date/num_class;
 qpsk_1 = ones(num_each,2);
 qpsk_1 = qpsk_1 + randn(num_each,2)*noise_stand_variance;
@@ -19,10 +19,7 @@ scatter(qpsk_3(:,1),qpsk_3(:,2),'g')
 hold on;
 scatter(qpsk_4(:,1),qpsk_4(:,2),'y')
 %% label and feature extract
-qpsk_1 = wiener_filtering(qpsk_1,noise_stand_variance,order);
-qpsk_2 = wiener_filtering(qpsk_2,noise_stand_variance,order);
-qpsk_3 = wiener_filtering(qpsk_3,noise_stand_variance,order);
-qpsk_4 = wiener_filtering(qpsk_4,noise_stand_variance,order);
+
 signal = [qpsk_1; qpsk_2];
 signal = [signal; qpsk_3];
 signal = [signal; qpsk_4];
